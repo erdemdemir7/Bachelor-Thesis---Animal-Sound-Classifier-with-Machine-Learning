@@ -1,0 +1,4 @@
+
+Silhouette Coefficient: 0.5508548021316528
+Estimated number of clusters: 48
+Estimated number of noise points: 75

@@ -1,0 +1,7 @@
+
+Model SVM:
+
+Mean Absolute Error: 1.6910994764397906
+Mean Squared Error: 12.036649214659686
+Root Mean Squared Error: 3.469387440840196
+Accuracy of Model: 0.6596858638743456

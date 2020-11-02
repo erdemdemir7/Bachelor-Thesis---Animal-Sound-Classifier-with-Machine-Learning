@@ -1,0 +1,30 @@
+bgmy A,bgmy mayy feb 14.wav
+bgmy A2,bgmy mayy feb 14.wav
+bgmy A3,bgmy mayy feb 14.wav
+bgmy A4,bgmy mayy feb 14.wav
+bgmy B2,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy B3,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy B4,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy C,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy C10,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy C11,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy C2,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy C3,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy C4,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy C5,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy C6,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy C7,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy C8,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy C9,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy D3,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy D4,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy D5,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy D6,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy D7,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy D8,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy E,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy E2,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy E3,bgmy_mwoo_mayy_mgyo_070214.wav
+bgmy F,bgmy_070214.wav
+bgmy F2,bgmy_070214.wav
+bgmyB,bgmy_mwoo_mayy_mgyo_070214.wav

@@ -1,0 +1,40 @@
+bomp A,bomp_060930.wav
+bomp A2,bomp_060930.wav
+bomp B,bomp_060930.wav
+bomp B2,bomp_060930.wav
+bomp B3,bomp_060930.wav
+bomp B4, bomp_060930.wav
+bomp BABBLE,bomp_060930.wav
+bomp C,bomp_060930.wav
+bomp C2,bomp_060930.wav
+bomp C3,bomp_060930.wav
+bomp D,bomp_060930.wav
+bomp D2,bomp_060930.wav
+bomp E,bomp_060930.wav
+bomp E2,bomp_060930.wav
+bomp E3,bomp_060930.wav
+bomp E4,bomp_060930.wav
+bomp E5,bomp_060930.wav
+bomp F,bomp_060930.wav
+bomp F2,bomp_060930.wav
+bomp F3,bomp_060930.wav
+bomp G,bomp_060930.wav
+bomp G10,bomp_060930.wav
+bomp G2,bomp_060930.wav
+bomp G3,bomp_060930.wav
+bomp G4,bomp_060930.wav
+bomp G5,bomp_060930.wav
+bomp G6,bomp_060930.wav
+bomp G7,bomp_060930.wav
+bomp G8,bomp_060930.wav
+bomp G9,bomp_060930.wav
+bomp H,bomp_060930.wav
+bomp H2,bomp_060930.wav
+bomp I,bomp_060930.wav
+bomp J,bomp_060930.wav
+bomp K1,bomp_060930.wav
+bomp L,bomp_060930.wav
+bomp L2,bomp_060930.wav
+bomp babble 3,bomp_060930.wav
+bomp babble 4,bomp_060930.wav
+bomp babble 5,bomp_060930.wav

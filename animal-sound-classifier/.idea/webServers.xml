@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="32ecb456-58f4-4fba-99d4-a9f7bd2faf21" name="https://github.com/erdemdemir7/Bachelor-Thesis---Animal-Sound-Classifier-with-Machine-Learning" url="https://github.com/erdemdemir7/Bachelor-Thesis---Animal-Sound-Classifier-with-Machine-Learning">
+        <fileTransfer accessType="LOCAL" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>

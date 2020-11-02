@@ -1,0 +1,37 @@
+bagm A,bagm and omar(ub)012007.wav
+bagm A2,bagm and omar(ub)012007.wav
+bagm B2,bagm and omar(ub)012007.wav
+bagm B3,bagm and omar(ub)012007.wav
+bagm B4 ,bagm and omar(ub)012007.wav
+bagm B5,bagm and omar(ub)012007.wav
+bagm C,bagm and omar(ub)012007.wav
+bagm C2,bagm and omar(ub)012007.wav
+bagm C3,bagm and omar(ub)012007.wav
+bagm C4,bagm and omar(ub)012007.wav
+bagm D,bagm and omar(ub)012007.wav
+bagm D2,bagm and omar(ub)012007.wav
+bagm D3,bagm and omar(ub)012007.wav
+bagm D4,bagm and omar(ub)012007.wav
+bagm D5,bagm and omar(ub)012007.wav
+bagm D6,bagm and omar(ub)012007.wav
+bagm E,bagm and omar(ub)012007.wav
+bagm E2,bagm and omar(ub)012007.wav
+bagm E4,miyp etc 013107partial scan.wav
+bagm F,021207 hmhy miyp bagm woodpile scanned.wav
+bagm F2,021207 hmhy miyp bagm woodpile scanned.wav
+bagm F3,021207 hmhy miyp bagm woodpile scanned.wav
+bagm F4,021207 hmhy miyp bagm woodpile scanned.wav
+bagm F5,021207 hmhy miyp bagm woodpile scanned.wav
+bagm F6,021207 hmhy miyp bagm woodpile scanned.wav
+bagm F7,021207 hmhy miyp bagm woodpile scanned.wav
+bagm G,021207 hmhy miyp bagm woodpile scanned.wav
+bagm G2,021207 hmhy miyp bagm woodpile scanned.wav
+bagm H,021207 hmhy miyp bagm woodpile scanned.wav
+bagm H2,021207 hmhy miyp bagm woodpile scanned.wav
+bagm I2,021207 hmhy miyp bagm woodpile scanned.wav
+bagm I3,021207 hmhy miyp bagm woodpile scanned.wav
+bagm I4,021207 hmhy miyp bagm woodpile scanned.wav
+bagm I5,021207 hmhy miyp bagm woodpile scanned.wav
+bagm J,mbcg and mcag CS 03282007.wav
+bagm J2,mbcg and mcag CS 03282007.wav
+bagm J3,mbcg and mcag CS 03282007.wav

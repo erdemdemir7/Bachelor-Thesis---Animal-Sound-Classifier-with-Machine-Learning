@@ -1,0 +1,1086 @@
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserIconView:
+            id: filechooser
+            path: './'
+            filters: ['*.wav']
+            multiselect: True
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+            Button:
+                text: "Load"
+                on_release:
+                    root.load(filechooser.path, filechooser.selection)
+
+<UploadWindow>:
+    name: "upload"
+
+    FloatLayout:
+        Label:
+            text: "Animal Sound Classifier"
+            size_hint: 0.8, 0.2
+            pos_hint: {'center': (.5, .8)}
+            font_size: 60
+
+        BoxLayout:
+            pos_hint:{'center': (0.45, .5)}
+            size_hint: (.4, .5)
+            orientation: "vertical"
+            RV:
+
+        Button:
+            pos_hint:{'center': (.7, .5)}
+            size: 250,100
+            size_hint: None, None # <---
+            font_size: 60
+            text: "Browse"
+            on_release: root.show_load_list()
+
+        Button:
+            pos_hint:{"x":0.05,"y":0.6}
+            size: 100,100
+            size_hint: None, None # <---
+            font_size: 60
+            text: "History"
+            on_release:
+                app.root.current = "history"
+                root.manager.transition.direction = "up"
+
+        Button:
+            pos_hint:{"x":0.05,"y":0.7}
+            size: 100,100
+            size_hint: None, None # <---
+            font_size: 60
+            text: "Homepage"
+            on_release:
+
+        Button:
+            pos_hint:{'center': (.5, .1)}
+            size: 250,100
+            size_hint: None, None # <---
+            font_size: 60
+            text: "Continue"
+            on_release:
+                app.root.current = "labelledwin"
+                root.manager.transition.direction = "left"
+
+
+<SelectableLabel>:
+    # Draw a background to indicate selection
+    canvas.before:
+        Color:
+            rgba: (.0, 0.9, .1, .3) if self.selected else (0, 0, 0, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<RV>:
+    viewclass: 'SelectableLabel'
+    SelectableRecycleBoxLayout:
+        default_size: None, dp(56)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+        multiselect: False
+        touch_multiselect: False
+
+<Un_SelectableLabel>:
+    # Draw a background to indicate selection
+    canvas.before:
+        Color:
+            rgba: (.0, 0.9, .1, .3) if self.selected else (0, 0, 0, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<Un_RV>:
+    viewclass: 'Un_SelectableLabel'
+    Un_SelectableRecycleBoxLayout:
+        default_size: None, dp(56)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+        multiselect: False
+        touch_multiselect: False
+
+<LabelledWindow>:
+    name: "labelledwin"
+
+    FloatLayout:
+        Label:
+            text: "Animal Sound Classifier"
+            size_hint: 0.8, 0.2
+            pos_hint: {'center': (.5, .8)}
+            font_size: 60
+
+    GridLayout:
+        rows: 2
+        size_hint: None, None # <---
+        size: 400, 200
+        pos_hint: {'center': (.5, .6)}
+
+        Label:
+            text: 'Labelled'
+            text_size: self.size
+            valign: 'middle'
+
+        CheckBox:
+            group: 'labelled'
+            id: lbl
+            text: "Labelled"
+            active: True
+            on_active:
+                root.next_page = "class-spec"
+                root.detail_page = "lbldetails"
+
+        Label:
+            text: "Not labelled"
+            text_size: self.size
+            valign: 'middle'
+
+        CheckBox:
+            group: 'labelled'
+            text: "Not Labelled"
+            on_active:
+                root.next_page = "clust-spec"
+                root.detail_page = "unlbldetails"
+
+    Button:
+        pos_hint:{'center': (.8, .1)}
+        size: 250,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "Next"
+        on_release:
+            app.root.current = root.next_page
+            root.manager.transition.direction = "left"
+
+    Button:
+        pos_hint:{'center': (.4, .1)}
+        size: 250,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "Back"
+        on_release:
+            app.root.current = "upload"
+            root.manager.transition.direction = "right"
+
+    Button:
+        pos_hint:{'center': (.6, .1)}
+        size: 250,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "Info"
+        on_release:
+            app.root.current = root.detail_page
+            root.manager.transition.direction = "up"
+
+
+<ClassificationSpecWindow>
+    name: "class-spec"
+
+    GridLayout:
+        rows: 8
+        size_hint: 0.6, 0.4
+        pos_hint: {'center': (.5, .6)}
+
+        GridLayout:
+            cols: 2
+
+            Label:
+                id: RFL
+                text: "Random Forest"
+                text_size: self.size
+                valign: 'middle'
+
+            CheckBox:
+                id: RF
+                text: "RF"
+                canvas.before:
+                    Color:
+                        rgb: 1,1,1
+                    Rectangle:
+                        pos:self.center_x-8, self.center_y-8
+                        size:[25,25]
+                    Color:
+                        rgb: 1,1,1
+                    Rectangle:
+                        pos:self.center_x-8, self.center_y-8
+                        size:[25,25]
+                on_active: root.insert_check1(self.active)
+
+        GridLayout:
+            cols: 3
+
+            Label:
+                id: num-estimators
+                text: "# Estimators:"
+                text_size: self.size
+                valign: 'middle'
+                halign: 'right'
+
+            TextInput:
+                id: num_estimators_input
+                multiline: False
+                input_filter: 'float'
+                disabled: True if optimized1.active else False
+                on_text: root.estimator_entered(num_estimators_input.text)
+
+            GridLayout:
+                rows:1
+
+                Label:
+                    id: optim1
+                    text: "Optimized:"
+                    text_size: self.size
+                    valign: 'middle'
+                    halign: 'right'
+
+                CheckBox:
+                    id: optimized1
+                    text: "Optimized"
+                    halign: 'left'
+                    canvas.before:
+                        Color:
+                            rgb: 1,1,1
+                        Rectangle:
+                            pos:self.center_x-8, self.center_y-8
+                            size:[20,20]
+                        Color:
+                            rgb: 1,1,1
+                        Rectangle:
+                            pos:self.center_x-8, self.center_y-8
+                            size:[20,20]
+                    on_active: root.optimized1_active(self.active)
+
+        GridLayout:
+            cols:3
+
+            GridLayout:
+                rows:1
+
+                Label:
+                    id: 5-fold
+                    text: "5-Fold Cross Validation:"
+                    text_size: self.size
+                    valign: 'middle'
+                    halign: 'right'
+
+                CheckBox:
+                    id: 5-fold
+                    text: "5-Fold"
+                    halign: 'left'
+                    canvas.before:
+                        Color:
+                            rgb: 1,1,1
+                        Rectangle:
+                            pos:self.center_x-8, self.center_y-8
+                            size:[20,20]
+                        Color:
+                            rgb: 1,1,1
+                        Rectangle:
+                            pos:self.center_x-8, self.center_y-8
+                            size:[20,20]
+                    on_active:
+                        root.five_fold1_checkbox_active(self.active)
+
+                Label:
+                    text: ""
+                    text_size: self.size
+                    valign: 'middle'
+
+                Label:
+                    text: ""
+                    text_size: self.size
+                    valign: 'middle'
+
+        GridLayout:
+            rows:1
+
+            Label:
+                text: ""
+                text_size: self.size
+                valign: 'middle'
+
+        GridLayout:
+            cols: 2
+
+            Label:
+                id: SVML
+                text: "SVM"
+                text_size: self.size
+                valign: 'middle'
+
+            CheckBox:
+                id: SVM
+                text: "SVM"
+                canvas.before:
+                    Color:
+                        rgb: 1,1,1
+                    Rectangle:
+                        pos:self.center_x-8, self.center_y-8
+                        size:[25,25]
+                    Color:
+                        rgb: 1,1,1
+                    Rectangle:
+                        pos:self.center_x-8, self.center_y-8
+                        size:[25,25]
+                on_active: root.insert_check2(self.active)
+
+        GridLayout:
+            cols:3
+
+            Label:
+                id: c
+                text: "c:"
+                text_size: self.size
+                valign: 'middle'
+                halign: 'right'
+
+            TextInput:
+                id: c-input
+                multiline: False
+                input_filter: 'float'
+                disabled: True if optimized2.active else False
+                halign: 'left'
+                on_text: root.c_entered(self.text)
+
+            GridLayout:
+                rows:1
+
+                Label:
+                    id: optim2
+                    text: "Optimized:"
+                    text_size: self.size
+                    valign: 'middle'
+                    halign: 'right'
+
+                CheckBox:
+                    id: optimized2
+                    text: "Optimized"
+                    halign: 'left'
+                    canvas.before:
+                        Color:
+                            rgb: 1,1,1
+                        Rectangle:
+                            pos:self.center_x-8, self.center_y-8
+                            size:[20,20]
+                        Color:
+                            rgb: 1,1,1
+                        Rectangle:
+                            pos:self.center_x-8, self.center_y-8
+                            size:[20,20]
+                    on_active: root.optimized2_active(self.active)
+
+        GridLayout:
+            cols:3
+
+            Label:
+                id: kernel
+                text: "Kernel:"
+                text_size: self.size
+                valign: 'middle'
+                halign: 'right'
+
+            Spinner:
+                id: spinner
+                on_text: root.spinner_clicked(spinner.text)
+                text: "Linear"
+                values: ["Linear", "rbf"]
+                disabled: True if optimized2.active else False
+                halign: 'left'
+
+            Label:
+                text: ""
+                text_size: self.size
+                valign: 'middle'
+
+        GridLayout:
+            cols:3
+
+            GridLayout:
+                rows:1
+
+                Label:
+                    id: 5-fold
+                    text: "5-Fold Cross Validation:"
+                    text_size: self.size
+                    valign: 'middle'
+                    halign: 'right'
+
+                CheckBox:
+                    id: 5-fold
+                    text: "5-Fold"
+                    halign: 'left'
+                    canvas.before:
+                        Color:
+                            rgb: 1,1,1
+                        Rectangle:
+                            pos:self.center_x-8, self.center_y-8
+                            size:[20,20]
+                        Color:
+                            rgb: 1,1,1
+                        Rectangle:
+                            pos:self.center_x-8, self.center_y-8
+                            size:[20,20]
+                    on_active: root.five_fold2_checkbox_active(self.active)
+
+                Label:
+                    text: ""
+                    text_size: self.size
+                    valign: 'middle'
+
+                Label:
+                    text: ""
+                    text_size: self.size
+                    valign: 'middle'
+
+    Button:
+        pos_hint:{'center': (.8, .1)}
+        size: 250,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "Next"
+        on_release:
+            root.insert_data()
+            app.root.current = "rfresults"
+            root.manager.transition.direction = "left"
+
+    Button:
+        pos_hint:{'center': (.6, .1)}
+        size: 250,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "Back"
+        on_release:
+            app.root.current = "labelledwin"
+            root.manager.transition.direction = "right"
+
+<ClusteringSpecWindow>
+    name: "clust-spec"
+    GridLayout:
+        rows: 6
+        size_hint: 0.6, 0.3
+        pos_hint: {'center': (.5, .6)}
+
+        GridLayout:
+            cols: 2
+
+            Label:
+                id: K-MeansL
+                text: "K-Means"
+                text_size: self.size
+                valign: 'middle'
+
+            CheckBox:
+                id: KMeans
+                text: "KMeans"
+                canvas.before:
+                    Color:
+                        rgb: 1,1,1
+                    Rectangle:
+                        pos:self.center_x-8, self.center_y-8
+                        size:[25,25]
+                    Color:
+                        rgb: 1,1,1
+                    Rectangle:
+                        pos:self.center_x-8, self.center_y-8
+                        size:[25,25]
+                on_active: root.insert_check1(self.active)
+
+        GridLayout:
+            cols: 3
+
+            Label:
+                id: num-clusters
+                text: "# Clusters: (1-15)"
+                text_size: self.size
+                valign: 'middle'
+                halign: 'right'
+
+            TextInput:
+                id: num-clusters-input
+                multiline: False
+                input_filter: 'float'
+                disabled: True if optimized1.active else False
+                on_text: root.cluster_entered(self.text)
+
+            GridLayout:
+                rows:1
+
+                Label:
+                    id: optim1
+                    text: "Optimized:"
+                    text_size: self.size
+                    valign: 'middle'
+                    halign: 'right'
+
+                CheckBox:
+                    id: optimized1
+                    text: "Optimized"
+                    halign: 'left'
+                    canvas.before:
+                        Color:
+                            rgb: 1,1,1
+                        Rectangle:
+                            pos:self.center_x-8, self.center_y-8
+                            size:[20,20]
+                        Color:
+                            rgb: 1,1,1
+                        Rectangle:
+                            pos:self.center_x-8, self.center_y-8
+                            size:[20,20]
+                    on_active: root.optimized1_active(self.active)
+
+        GridLayout:
+            rows:1
+
+            Label:
+                text: ""
+                text_size: self.size
+                valign: 'middle'
+
+        GridLayout:
+            cols: 2
+
+            Label:
+                id: DBSCANL
+                text: "DBSCAN"
+                text_size: self.size
+                valign: 'middle'
+
+            CheckBox:
+                id: DBSCAN
+                text: "DBSCAN"
+                canvas.before:
+                    Color:
+                        rgb: 1,1,1
+                    Rectangle:
+                        pos:self.center_x-8, self.center_y-8
+                        size:[25,25]
+                    Color:
+                        rgb: 1,1,1
+                    Rectangle:
+                        pos:self.center_x-8, self.center_y-8
+                        size:[25,25]
+                on_active: root.insert_check2(self.active)
+
+        GridLayout:
+            cols:3
+
+            Label:
+                id: eps
+                text: "Eps: (0.1<x<0.5)"
+                text_size: self.size
+                valign: 'middle'
+                halign: 'right'
+
+            TextInput:
+                id: eps-input
+                multiline: False
+                input_filter: 'float'
+                disabled: True if optimized2.active else False
+                halign: 'left'
+                on_text: root.eps_entered(self.text)
+
+            GridLayout:
+                rows:1
+
+                Label:
+                    id: optim2
+                    text: "Optimized:"
+                    text_size: self.size
+                    valign: 'middle'
+                    halign: 'right'
+
+                CheckBox:
+                    id: optimized2
+                    text: "Optimized"
+                    halign: 'left'
+                    canvas.before:
+                        Color:
+                            rgb: 1,1,1
+                        Rectangle:
+                            pos:self.center_x-8, self.center_y-8
+                            size:[20,20]
+                        Color:
+                            rgb: 1,1,1
+                        Rectangle:
+                            pos:self.center_x-8, self.center_y-8
+                            size:[20,20]
+                    on_active: root.optimized2_active(self.active)
+
+        GridLayout:
+            cols:3
+
+            Label:
+                id: min-sample
+                text: "Min. Samples: (1<x<5)"
+                text_size: self.size
+                valign: 'middle'
+                halign: 'right'
+
+            TextInput:
+                id: min-samples-input
+                multiline: False
+                input_filter: 'float'
+                disabled: True if optimized2.active else False
+                halign: 'left'
+                on_text: root.min_samples_entered(self.text)
+
+            Label:
+                text: ""
+                text_size: self.size
+                valign: 'middle'
+
+    Button:
+        pos_hint:{'center': (.8, .1)}
+        size: 250,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "Next"
+        on_release:
+            root.insert_data()
+            app.root.current = "kmeansresults"
+            root.manager.transition.direction = "left"
+
+    Button:
+        pos_hint:{'center': (.6, .1)}
+        size: 250,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "Back"
+        on_release:
+            app.root.current = "labelledwin"
+            root.manager.transition.direction = "right"
+
+<WaitScreenClass>:
+    name: "waitscreen"
+
+    FloatLayout:
+        Label:
+            text: "Please wait"
+            text_size: self.size
+
+<WaitScreenClust>:
+    name: "waitscreen"
+
+    FloatLayout:
+        Label:
+            text: "Please wait"
+            text_size: self.size
+
+<RFResultsWindow>:
+    name: "rfresults"
+
+    Label:
+        text: "Random Forest"
+        pos_hint: {'center': (.5, .9)}
+        font_size: 60
+
+    GridLayout:
+        id: grid
+        size_hint: (.7, .7)
+        pos_hint: {'center': (.5, .55)}
+        cols: 3
+
+        Image:
+            id: rfimg
+            source: root.graphpath
+            allow_stretch: True
+
+        BoxLayout:
+            size_hint_x: .1
+
+        BoxLayout:
+            Label:
+                text: root.label
+                text_size: self.size
+                valign: 'middle'
+
+    Button:
+        pos_hint:{'center': (.2, .1)}
+        size: 500,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "SVM Results"
+        on_release:
+            app.root.current = "svmresults"
+            root.manager.transition.direction = "up"
+
+    Button:
+        pos_hint:{'center': (.8, .1)}
+        size: 250,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "Exit"
+        on_release:
+            app.stop()
+
+<SVMResultsWindow>:
+    name: "svmresults"
+
+    Label:
+        text: "SVM"
+        pos_hint: {'center': (.5, .9)}
+        font_size: 60
+
+    GridLayout:
+        size_hint: (.7, .7)
+        pos_hint: {'center': (.5, .55)}
+        cols: 3
+
+        Image:
+            id: svmimg
+            source: root.graphpath
+            allow_stretch: True
+
+        BoxLayout:
+            size_hint_x: .1
+
+        BoxLayout:
+            Label:
+                text: root.label
+                text_size: self.size
+                valign: 'middle'
+
+    Button:
+        pos_hint:{'center': (.2, .1)}
+        size: 500,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "RF Results"
+        on_release:
+            app.root.current = "rfresults"
+            root.manager.transition.direction = "down"
+
+    Button:
+        pos_hint:{'center': (.8, .1)}
+        size: 250,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "Exit"
+        on_release:
+            app.stop()
+
+<KMeansResultsWindow>:
+    name: "kmeansresults"
+
+    Label:
+        text: "K-Means"
+        pos_hint: {'center': (.5, .9)}
+        font_size: 60
+
+    GridLayout:
+        size_hint: (.7, .7)
+        pos_hint: {'center': (.5, .55)}
+        cols: 3
+
+        Image:
+            id: kmeansimg
+            source: root.graphpath
+            allow_stretch: True
+
+        BoxLayout:
+            size_hint_x: .1
+
+        BoxLayout:
+            Label:
+                text: root.label
+                text_size: self.size
+                valign: 'middle'
+
+    Button:
+        pos_hint:{'center': (.2, .1)}
+        size: 500,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "DBSCAN Results"
+        on_release:
+            app.root.current = "dbscanresults"
+            root.manager.transition.direction = "up"
+
+    Button:
+        pos_hint:{'center': (.8, .1)}
+        size: 250,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "Exit"
+        on_release:
+            app.stop()
+
+<DBSCANResultsWindow>:
+    name: "dbscanresults"
+
+    Label:
+        text: "DBSCAN"
+        pos_hint: {'center': (.5, .9)}
+        font_size: 60
+
+    GridLayout:
+        size_hint: (.7, .7)
+        pos_hint: {'center': (.5, .55)}
+        cols: 3
+
+        Image:
+            id: dbscanimg
+            source: root.graphpath
+            allow_stretch: True
+
+        BoxLayout:
+            size_hint_x: .1
+
+        BoxLayout:
+            Label:
+                text: root.label
+                text_size: self.size
+                valign: 'middle'
+
+    Button:
+        pos_hint:{'center': (.2, .1)}
+        size: 500,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "K-Means Results"
+        on_release:
+            app.root.current = "kmeansresults"
+            root.manager.transition.direction = "down"
+
+    Button:
+        pos_hint:{'center': (.8, .1)}
+        size: 250,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "Exit"
+        on_release:
+            app.stop()
+
+<LabelledDetailsWindow>:
+    name: "lbldetails"
+
+    FloatLayout:
+
+        Button:
+            pos_hint:{'center': (.2, .9)}
+            size: 250,100
+            size_hint: None, None # <---
+            font_size: 60
+            text: "Back"
+            on_release:
+                app.root.current = "labelledwin"
+                root.manager.transition.direction = "down"
+                root.delete_plot()
+
+        Button:
+            pos_hint:{'center': (.2, .1)}
+            size: 250,100
+            size_hint: None, None # <---
+            font_size: 60
+            text: "Play"
+            on_release:
+                root.play()
+
+        Button:
+            pos_hint:{'center': (.8, .1)}
+            size: 250,100
+            size_hint: None, None # <---
+            font_size: 60
+            text: "Plot"
+            on_release:
+                root.plot()
+
+        Image:
+            pos_hint:{'center': (.65,.5)}
+            size_hint: (.6,.5)
+            allow_stretch: True
+            source: root.graphpath
+
+
+        BoxLayout:
+            pos_hint:{'center': (.2, .5)}
+            size_hint: (.3, .6)
+            orientation: "vertical"
+            RV:
+
+<UnlabelledDetailsWindow>:
+    name: "unlbldetails"
+
+    FloatLayout:
+
+        Button:
+            pos_hint:{'center': (.2, .9)}
+            size: 250,100
+            size_hint: None, None # <---
+            font_size: 60
+            text: "Back"
+            on_release:
+                app.root.current = "labelledwin"
+                root.manager.transition.direction = "down"
+                root.delete_plot()
+
+        Button:
+            pos_hint:{'center': (.2, .1)}
+            size: 250,100
+            size_hint: None, None # <---
+            font_size: 60
+            text: "Play"
+            on_release:
+                root.play()
+
+        Button:
+            pos_hint:{'center': (.8, .1)}
+            size: 250,100
+            size_hint: None, None # <---
+            font_size: 60
+            text: "Plot"
+            on_release:
+                root.plot()
+
+        Image:
+            pos_hint:{'center': (.65,.5)}
+            size_hint: (.6,.5)
+            allow_stretch: True
+            source: root.graphpath
+
+
+        BoxLayout:
+            pos_hint:{'center': (.2, .5)}
+            size_hint: (.3, .6)
+            orientation: "vertical"
+            Un_RV:
+
+<HistoryWindow>:
+    name: "history"
+
+    FloatLayout:
+        Button:
+            pos_hint:{"x":0.05,"y":0.6}
+            size: 100,100
+            size_hint: None, None # <---
+            font_size: 60
+            text: "History"
+            on_release:
+
+        Button:
+            pos_hint:{"x":0.05,"y":0.7}
+            size: 100,100
+            size_hint: None, None # <---
+            font_size: 60
+            text: "Homepage"
+            on_release:
+                app.root.current = "upload"
+                root.manager.transition.direction = "down"
+
+
+
+
+
+
+
+#discontinued
+<AlgoWindow>:
+    name: "algo"
+
+    GridLayout:
+        rows: 2
+        size_hint: None, None # <---
+        size: 900, 400
+        pos_hint: {'center': (.5, .5)}
+
+        GridLayout:
+            cols: 2
+
+            Label:
+                id: checklabel1
+                text: root.check1label
+                text_size: self.size
+                valign: 'middle'
+
+            CheckBox:
+                id: check1
+                text: root.check1
+                on_active:
+                    root.check1output = self.text
+
+            GridLayout:
+                rows:2
+
+                Label:
+                    id: param1_1
+                    text: root.param1_1
+                    text_size: self.size
+                    valign: 'middle'
+
+                GridLayout:
+                    cols: 3
+
+                    TextInput:
+                        id: inputparam1_1
+                        multiline: False
+                        input_filter: 'int'
+                        disabled: True if optimized1.active else False
+
+                    Label:
+                        id: optim1
+                        text: "Optimized"
+                        text_size: self.size
+                        valign: 'middle'
+
+                    CheckBox:
+                        id: optimized1
+                        text: "Optimized"
+
+        GridLayout:
+            cols: 2
+
+            Label:
+                id: checklabel2
+                text: root.check2label
+                text_size: self.size
+                valign: 'middle'
+
+            CheckBox:
+                id: check2
+                text: root.check2
+                on_active:
+                    root.check2output = self.text
+
+    Button:
+        pos_hint:{'center': (.5, .1)}
+        size: 250,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "Continue"
+        on_release:
+            root.insert_data()
+            app.root.current = "continue"
+            root.manager.transition.direction = "left"
+
+    Button:
+        pos_hint:{'center': (.6, .1)}
+        size: 250,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "Back"
+        on_release:
+            app.root.current = "upload"
+            root.manager.transition.direction = "right"
+
+    Button:
+        pos_hint:{'center': (.5, .1)}
+        size: 250,100
+        size_hint: None, None # <---
+        font_size: 60
+        text: "Info"
+        on_release:
+            app.root.current = "details"
+            root.manager.transition.direction = "up"
